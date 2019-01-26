@@ -1,5 +1,5 @@
-pragma solidity >=0.4.22 <0.6.0;
-contract GoalContract
+pragma solidity ^0.4.24;
+contract Goal
 {
     address payable userAddress; // users address, for returning money
     uint64 amount; // amount of currency stored
