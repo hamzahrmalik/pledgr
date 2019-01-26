@@ -1,11 +1,11 @@
 pragma solidity ^0.4.24;
 contract Goal
 {
-    address payable userAddress; // users address, for returning money
+    address userAddress; // users address, for returning money
     uint64 amount; // amount of currency stored
     string goalDescription; // brief description
     uint64 deadline; // Sort it out to be hours / convert to unix epoch //diff types of goals
-    address payable forfeitAddress; // address for money to be sent to on forfeit
+    address forfeitAddress; // address for money to be sent to on forfeit
     WitnessData[] witnesses; // array of "witnesses"
 
     struct WitnessData
@@ -17,7 +17,7 @@ contract Goal
 
     /// initialises a contract with { #witnesses, amount of money, description, deadline, forfeit address,
     ///                             {witnessAdresses} }
-    constructor (uint32 amountOfWitnesses, uint64 _amount, string memory _goalDescription, uint64 _deadline, address payable _forfeitAddress, address[] memory _witnessAddresses) public {
+    constructor(uint32 amountOfWitnesses, uint64 _amount, string memory _goalDescription, uint64 _deadline, address _forfeitAddress, address[] memory _witnessAddresses) public {
         userAddress = msg.sender; // set user address to that of current user
         amount = _amount;
         goalDescription = _goalDescription;
