@@ -105,12 +105,12 @@ export function getPledges() {
               console.log(result);
 
               console.log("resolved", result);
-              result = result.forEach(r => {
-                r.contract.goalDescription.call(function(err, res) {
-                  //do something with res here
-                  console.log(res); //for example
-                });
-              });
+              //   result = result.forEach(r => {
+              //     r.contract.goalDescription.call(function(err, res) {
+              //       //do something with res here
+              //       console.log(res); //for example
+              //     });
+              //   });
               dispatch(updatePledges(result));
             });
           });
