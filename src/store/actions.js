@@ -98,7 +98,7 @@ export function getPledges() {
   }
 }
 
-  export function vote(address) {
+  export function vote(address, _vote) {
     let web3 = store.getState.web3.web3Instance;
 
      // Double-check web3's status.
@@ -121,11 +121,12 @@ export function getPledges() {
           from: coinbase
         });
         originalContract.at(address).then(instance => {
-          instance.getGoals().then(goals => {
-            console.log(goals);
+          instance.vote(_vote);
           });
-
-
-    
-
+        })
+      }
+    }
   }
+
+
+        

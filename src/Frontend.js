@@ -216,18 +216,20 @@ class App extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {};
+  return {
+    pledges: state.pledgesReducer.pledges
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {
-        createPledge: () => {
-            dispatch(createPledge());
-        },
-        updatePledges: () => {
-            dispatch(getPledges());
-        }
-    };
+  return {
+    createPledgeFunc: () => {
+      dispatch(createPledge());
+    },
+    updatePledges: () => {
+      dispatch(getPledges());
+    }
+  };
 };
 
 export default connect(
