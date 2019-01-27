@@ -1,35 +1,35 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
-import './App.css';
-import Button from '@material-ui/core/Button';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import MenuIcon from '@material-ui/core/Menu';
-import classes from '@material-ui/core/package.json';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField';
+import Button from "@material-ui/core/Button";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import MenuIcon from "@material-ui/core/Menu";
+import classes from "@material-ui/core/package.json";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import TextField from "@material-ui/core/TextField";
 import dateFormat from "dateformat";
 
-
 let id = 0;
+
 function createData(name, started, ended, witnesses, charity, value) {
     id += 1;
     return {id, name, started, ended, witnesses, charity, value};
+
 }
 
-
 class App extends Component {
+
 
     constructor(props) {
         super(props);
@@ -211,10 +211,10 @@ class App extends Component {
                 </Dialog>
 
             </div>
-
-
+            
         );
     }
+
 }
 
 export default App;
