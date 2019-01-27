@@ -20,7 +20,7 @@ class Vote extends Component {
         console.log("YE");
     };
 
-    clickedNo(){
+    clickedNo() {
         console.log("NO");
     };
 

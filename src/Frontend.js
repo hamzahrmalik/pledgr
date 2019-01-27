@@ -99,7 +99,7 @@ class Frontend extends Component {
                                     <TableCell>Started</TableCell>
                                     <TableCell>End</TableCell>
                                     <TableCell>Witnesses</TableCell>
-                                    <TableCell>Charity</TableCell>
+                                    <TableCell>Foreit</TableCell>
                                     <TableCell>Value</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -170,7 +170,7 @@ class Frontend extends Component {
               autoFocus
               margin="normal"
               name="charity"
-              label="Charity Address"
+              label="Forfeit Address"
               value={this.state.charity}
               onChange={this.handleInputChange}
               type="text"
