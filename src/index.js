@@ -5,7 +5,8 @@ import { Provider } from "react-redux";
 import { syncHistoryWithStore } from "react-router-redux";
 
 // Layouts
-import App from "./App";
+import Frontend from "./Frontend";
+import Vote from "./Vote";
 
 // Redux Store
 import store from "./store";
@@ -18,7 +19,8 @@ const history = syncHistoryWithStore(browserHistory, store);
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={App} />
+      <Route path="vote" component={Vote} />
+      <Route path="/" component={Frontend} />
     </Router>
   </Provider>,
   document.getElementById("root")
