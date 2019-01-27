@@ -5,9 +5,8 @@ import {Provider} from "react-redux";
 import {syncHistoryWithStore} from "react-router-redux";
 
 // Layouts
-import Frontend from "./Frontend";
+import Frontend from "./App";
 import Vote from "./Vote";
-
 
 // Redux Store
 import store from "./store";
@@ -17,14 +16,13 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 // Initialize web3 and set in Redux.
 
-
 ReactDOM.render(
-    <Provider store={store}>
-        <Router history={history}>
-            <Route path="vote" component={Vote}/>
-            <Route path="/" component={Frontend}>
-            </Route>
-        </Router>
-    </Provider>,
-    document.getElementById("root")
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path="vote" component={Vote} />
+      <Route path="/" component={Frontend} />
+    </Router>
+  </Provider>,
+  document.getElementById("root")
+
 );
