@@ -1,4 +1,5 @@
-pragma solidity ^0.4.24;
+//pragma solidity ^0.4.24;
+pragma solidity >=0.4.22 <0.6.0;
 contract Goal
 {
     address userAddress; // users address, for returning money
@@ -23,7 +24,8 @@ contract Goal
 
     /// initialises a contract with { #witnesses, amount of money, description, deadline, forfeit address,
     ///                             {witnessAdresses} }
-    constructor (uint32 amountOfWitnesses, uint64 _amount, string memory _goalDescription, uint32 _deadline, address _forfeitAddress, address[] memory _witnessAddresses) public {
+
+    constructor(uint32 amountOfWitnesses, uint64 _amount, string memory _goalDescription, uint32 _deadline, address _forfeitAddress, address[] memory _witnessAddresses) public {
         userAddress = msg.sender; // set user address to that of current user
         amount = _amount;
         goalDescription = _goalDescription;
