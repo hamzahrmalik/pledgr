@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
+import { Link } from "react-router";
 import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -83,9 +84,7 @@ class App extends Component {
             <div className=" ">
                 <AppBar position="static">
                     <Toolbar>
-                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-                            <MenuIcon />
-                        </IconButton>
+
                         <Typography variant="title" color="inherit" className={classes.flex}>
                             PLEDGR
                         </Typography>
@@ -211,7 +210,7 @@ class App extends Component {
                 </Dialog>
 
             </div>
-            
+
         );
     }
 

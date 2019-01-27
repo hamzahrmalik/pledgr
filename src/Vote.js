@@ -20,28 +20,15 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import dateFormat from "dateformat";
 
-let id = 0;
-
-function createData(name, started, ended, witnesses, charity, value) {
-    id += 1;
-    return {id, name, started, ended, witnesses, charity, value};
-
-}
-
-class App extends Component {
+class Vote extends Component {
 
 
     constructor(props) {
         super(props);
 
 
-        this.handleInputChange = this.handleInputChange.bind(this);
-    }
 
-    state = {
-        addDialogOpen: false,
-        data: []
-    };
+    }
 
     handleClickOpen = () => {
         this.setState({addDialogOpen: true});
@@ -51,164 +38,34 @@ class App extends Component {
         this.setState({addDialogOpen: false});
     };
 
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
 
-        this.setState({
-            [name]: value
-        });
-    }
-
-    addItem = () => {
-
-        let data = this.state.data;
-        let newDatum = createData(this.state.pledge, new Date().getTime(), this.state.endDate, this.state.witness, this.state.charity, this.state.amount);
-        data.push(newDatum);
-
-        this.setState({data: data});
-        this.makeContract(newDatum);
-        this.handleClose();
-    };
-
-    makeContract = (data) => {
-        console.log("Making contract of");
-        console.log(data)
-        //TODO do the magic
-    };
 
     render() {
         return (
             <div className=" ">
                 <AppBar position="static">
                     <Toolbar>
-                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-                            <MenuIcon />
-                        </IconButton>
+
                         <Typography variant="title" color="inherit" className={classes.flex}>
-                            PLEDGR
+                            Pledgr
                         </Typography>
 
                     </Toolbar>
                 </AppBar>
 
 
-                <div style={{padding: 16}}>
-
-                    <h1>My Pledges</h1>
+                <div style={{padding: 16, textAlign: 'center'}}>
 
 
-                    <Paper className={classes.root}>
-                        <Table className={classes.table}>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Pledge</TableCell>
-                                    <TableCell>Started</TableCell>
-                                    <TableCell>End</TableCell>
-                                    <TableCell>Witnesses</TableCell>
-                                    <TableCell>Charity</TableCell>
-                                    <TableCell>Value</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {this.state.data.map(n => {
-                                    return (
-                                        <TableRow key={n.id}>
-                                            <TableCell component="th" scope="row">
-                                                {n.name}
-                                            </TableCell>
-                                            <TableCell>{dateFormat(n.started, "dddd, mmmm dS, yyyy")}</TableCell>
-                                            <TableCell>{dateFormat(n.ended, "dddd, mmmm dS, yyyy")}</TableCell>
-                                            <TableCell>{n.witnesses}</TableCell>
-                                            <TableCell>{n.charity}</TableCell>
-                                            <TableCell>{n.value}</TableCell>
-                                        </TableRow>
-                                    );
-                                })}
-                            </TableBody>
-                        </Table>
-                    </Paper>
+                    <h1>Vote</h1>
+                    <h2>Did they do the thing?</h2>
 
-                    <Button variant="contained" color="primary" style={{marginTop: 16}} onClick={this.handleClickOpen}>
-                        Add Pledge
-                    </Button>
+
+                    <Button style={{height: 200, width: 200, background: '#33ff88', color: '#FFF', fontSize: 40}}>YES</Button>
+                    <Button style={{height: 200, width: 200, background: '#ff5555', marginLeft: 100, color: '#FFF', fontSize: 40}}>NO</Button>
 
                 </div>
-                <Dialog
-                    open={this.state.addDialogOpen}
-                    onClose={this.handleClose}
-                    aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Add Pledge</DialogTitle>
-                    <DialogContent>
-                        <TextField
-                            autoFocus
-                            margin="normal"
-                            id="name"
-                            label="Pledge"
-                            InputLabelProps={{shrink: true}}
-                            name="pledge"
-                            value={this.state.pledge}
-                            onChange={this.handleInputChange}
-                            type="text"
-                            fullWidth
-                        />
-                        <TextField
-                            InputLabelProps={{shrink: true}}
-                            autoFocus
-                            margin="normal"
-                            name="witness"
-                            label="Witness Address"
-                            type="text"
-                            value={this.state.witness}
-                            onChange={this.handleInputChange}
-                            fullWidth
-                        />
-                        <TextField
-                            InputLabelProps={{shrink: true}}
-                            autoFocus
-                            margin="normal"
-                            name="charity"
-                            label="Charity Address"
-                            value={this.state.charity}
-                            onChange={this.handleInputChange}
-                            type="text"
-                            fullWidth
-                        />
-                        <TextField
-                            autoFocus
-                            margin="normal"
-                            InputLabelProps={{shrink: true}}
-                            id="value"
-                            name="amount"
-                            value={this.state.amount}
-                            onChange={this.handleInputChange}
-                            label="Value (ETH)"
-                            type="number"
-                            fullWidth
-                        />
-                        <TextField
-                            InputLabelProps={{shrink: true}}
-                            autoFocus
-                            margin="normal"
-                            id="endDate"
-                            name="endDate"
-                            value={this.state.endDate}
-                            onChange={this.handleInputChange}
-                            label="End Date"
-                            type="date"
-                            fullWidth
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
-                            Cancel
-                        </Button>
-                        <Button onClick={this.addItem} color="primary">
-                            Add
-                        </Button>
-                    </DialogActions>
-                </Dialog>
+
 
             </div>
 
@@ -217,4 +74,4 @@ class App extends Component {
 
 }
 
-export default App;
+export default Vote;
