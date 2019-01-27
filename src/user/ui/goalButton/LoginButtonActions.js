@@ -48,6 +48,9 @@ export function loginUser() {
             ["0xB1823546a3D953e458503b02422936f0317A2352"]
           ])
           .then(result => {
+            goalRegistry.defaults({
+              from: coinbase
+            });
             goalRegistry.deployed().then(instance => {
               instance.registerContract(result.address);
               console.log(instance);

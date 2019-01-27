@@ -10,6 +10,5 @@ module.exports = function(deployer) {
   deployer.deploy(Killable);
   deployer.link(Killable, Authentication);
   deployer.deploy(Authentication);
-  deployer.deploy(Goal);
-  deployer.deploy(GoalRegistry);
+  deployer.deploy(GoalRegistry, { overwrite: false });
 };
