@@ -2,24 +2,24 @@
 pragma solidity >=0.4.22 <0.6.0;
 contract Goal
 {
-    address userAddress; // users address, for returning money
-    uint64 amount; // amount of currency stored
-    string goalDescription; // brief description
-    uint32 deadline; // Sort it out to be hours / convert to unix epoch //diff types of goals
-    address forfeitAddress; // address for money to be sent to on forfeit
+    address public userAddress; // users address, for returning money
+    uint64 public amount; // amount of currency stored
+    string public goalDescription; // brief description
+    uint32 public deadline; // Sort it out to be hours / convert to unix epoch //diff types of goals
+    address public forfeitAddress; // address for money to be sent to on forfeit
 
-    WitnessData[] witnesses; // array of "witnesses"
+    WitnessData[] public witnesses; // array of "witnesses"
 
     /* If all witnesses voted, this would give the number of voters necessary; used to calculate proportion of
 		(i) total number of judges who voted True for early condition, or
 		(ii) voting judges who voted True for deadline condition */
-	uint8 minWitnessesIfAllVote;
+	uint8 public minWitnessesIfAllVote;
 
     struct WitnessData
     {
         address witnessAddress;
-        bool voted;
-        uint32 vote; // floats?
+        bool  voted;
+        uint32  vote; // floats?
     }
 
     /// initialises a contract with { #witnesses, amount of money, description, deadline, forfeit address,

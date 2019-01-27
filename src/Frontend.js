@@ -101,7 +101,6 @@ class App extends Component {
 
         <div style={{ padding: 16 }}>
           <h1>My Pledges</h1>
-          {this.props.pledges.length}
           <Paper className={classes.root}>
             <Table className={classes.table}>
               <TableHead>
@@ -115,6 +114,25 @@ class App extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
+                {/* {this.props.pledges.map(p => {
+                  return (
+                    <TableRow key={p.address}>
+                      <TableCell component="th" scope="row">
+                        {p.goalDescription()}
+                      </TableCell>
+                      <TableCell>
+                        {dateFormat(.started, "dddd, mmmm dS, yyyy")}
+                      </TableCell>
+                      <TableCell>
+                        {p.deadline()}
+                        {dateFormat(n.ended, "dddd, mmmm dS, yyyy")}
+                      </TableCell>
+                      <TableCell>{p.witnesses().length}</TableCell>
+                      <TableCell>{p.forfeitAddress}</TableCell>
+                      <TableCell>{p.amount}</TableCell>
+                    </TableRow>
+                  );
+                })} */}
                 {this.state.data.map(n => {
                   return (
                     <TableRow key={n.id}>
