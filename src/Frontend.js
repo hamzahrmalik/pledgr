@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import { Link } from "react-router";
+import {Link} from "react-router";
 import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -20,21 +20,18 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import dateFormat from "dateformat";
-
+import {createPledge, getPledges} from "./store/actions";
+import {connect} from "react-redux";
 let id = 0;
 
 function createData(name, started, ended, witnesses, charity, value) {
     id += 1;
     return {id, name, started, ended, witnesses, charity, value};
-
 }
 
 class App extends Component {
-
-
     constructor(props) {
         super(props);
-
 
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -43,6 +40,10 @@ class App extends Component {
         addDialogOpen: false,
         data: []
     };
+
+    //   componentDidMount() {
+    //     this.props.updatePledges();
+    //   }
 
     handleClickOpen = () => {
         this.setState({addDialogOpen: true});
@@ -54,7 +55,7 @@ class App extends Component {
 
     handleInputChange(event) {
         const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const value = target.type === "checkbox" ? target.checked : target.value;
         const name = target.name;
 
         this.setState({
@@ -63,9 +64,15 @@ class App extends Component {
     }
 
     addItem = () => {
-
         let data = this.state.data;
-        let newDatum = createData(this.state.pledge, new Date().getTime(), this.state.endDate, this.state.witness, this.state.charity, this.state.amount);
+        let newDatum = createData(
+            this.state.pledge,
+            new Date().getTime(),
+            this.state.endDate,
+            this.state.witness,
+            this.state.charity,
+            this.state.amount
+        );
         data.push(newDatum);
 
         this.setState({data: data});
@@ -73,9 +80,10 @@ class App extends Component {
         this.handleClose();
     };
 
-    makeContract = (data) => {
+    makeContract = data => {
+        this.props.createPledge();
         console.log("Making contract of");
-        console.log(data)
+        console.log(data);
         //TODO do the magic
     };
 
@@ -84,19 +92,26 @@ class App extends Component {
             <div className=" ">
                 <AppBar position="static">
                     <Toolbar>
-
-                        <Typography variant="title" color="inherit" className={classes.flex}>
+                        <IconButton
+                            className={classes.menuButton}
+                            color="inherit"
+                            aria-label="Menu"
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography
+                            variant="title"
+                            color="inherit"
+                            className={classes.flex}
+                        >
                             PLEDGR
                         </Typography>
-
                     </Toolbar>
                 </AppBar>
 
 
                 <div style={{padding: 16}}>
-
                     <h1>My Pledges</h1>
-
 
                     <Paper className={classes.root}>
                         <Table className={classes.table}>
@@ -117,8 +132,12 @@ class App extends Component {
                                             <TableCell component="th" scope="row">
                                                 {n.name}
                                             </TableCell>
-                                            <TableCell>{dateFormat(n.started, "dddd, mmmm dS, yyyy")}</TableCell>
-                                            <TableCell>{dateFormat(n.ended, "dddd, mmmm dS, yyyy")}</TableCell>
+                                            <TableCell>
+                                                {dateFormat(n.started, "dddd, mmmm dS, yyyy")}
+                                            </TableCell>
+                                            <TableCell>
+                                                {dateFormat(n.ended, "dddd, mmmm dS, yyyy")}
+                                            </TableCell>
                                             <TableCell>{n.witnesses}</TableCell>
                                             <TableCell>{n.charity}</TableCell>
                                             <TableCell>{n.value}</TableCell>
@@ -129,15 +148,20 @@ class App extends Component {
                         </Table>
                     </Paper>
 
-                    <Button variant="contained" color="primary" style={{marginTop: 16}} onClick={this.handleClickOpen}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        style={{marginTop: 16}}
+                        onClick={this.handleClickOpen}
+                    >
                         Add Pledge
                     </Button>
-
                 </div>
                 <Dialog
                     open={this.state.addDialogOpen}
                     onClose={this.handleClose}
-                    aria-labelledby="form-dialog-title">
+                    aria-labelledby="form-dialog-title"
+                >
                     <DialogTitle id="form-dialog-title">Add Pledge</DialogTitle>
                     <DialogContent>
                         <TextField
@@ -208,12 +232,27 @@ class App extends Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
-
             </div>
-
         );
     }
-
 }
 
-export default App;
+const mapStateToProps = (state, ownProps) => {
+    return {};
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        createPledge: () => {
+            dispatch(createPledge());
+        },
+        updatePledges: () => {
+            dispatch(getPledges());
+        }
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);

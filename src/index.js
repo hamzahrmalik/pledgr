@@ -1,22 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
 import {Router, Route, IndexRoute, browserHistory} from "react-router";
 import {Provider} from "react-redux";
 import {syncHistoryWithStore} from "react-router-redux";
-import {
-    UserIsAuthenticated,
-    UserIsNotAuthenticated
-} from "./util/wrappers.js";
 import getWeb3 from "./util/web3/getWeb3";
 
 // Layouts
 //import App from "./App";
 import Frontend from "./Frontend";
 import Vote from "./Vote";
-import Home from "./layouts/home/Home";
-import Dashboard from "./layouts/dashboard/Dashboard";
-import SignUp from "./user/layouts/signup/SignUp";
-import Profile from "./user/layouts/profile/Profile";
 
 // Redux Store
 import store from "./store";
@@ -34,6 +27,7 @@ getWeb3
     });
 
 ReactDOM.render(
+
     <Provider store={store}>
         <Router history={history}>
             <Route path="vote" component={Vote}/>
@@ -42,4 +36,5 @@ ReactDOM.render(
         </Router>
     </Provider>,
     document.getElementById("root")
+
 );
