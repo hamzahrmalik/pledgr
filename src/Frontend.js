@@ -23,9 +23,9 @@ import dateFormat from "dateformat";
 
 
 let id = 0;
-function createData(name, started, ended, witnesses, value) {
+function createData(name, started, ended, witnesses, charity, value) {
     id += 1;
-    return {id, name, started, ended, witnesses, value};
+    return {id, name, started, ended, witnesses, charity, value};
 }
 
 
@@ -64,7 +64,7 @@ class App extends Component {
     addItem = () => {
 
         let data = this.state.data;
-        let newDatum = createData(this.state.pledge, new Date().getTime(), this.state.endDate, "Bill", this.state.amount);
+        let newDatum = createData(this.state.pledge, new Date().getTime(), this.state.endDate, this.state.witness, this.state.charity, this.state.amount);
         data.push(newDatum);
 
         this.setState({data: data});
@@ -107,6 +107,7 @@ class App extends Component {
                                     <TableCell>Started</TableCell>
                                     <TableCell>End</TableCell>
                                     <TableCell>Witnesses</TableCell>
+                                    <TableCell>Charity</TableCell>
                                     <TableCell>Value</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -120,6 +121,7 @@ class App extends Component {
                                             <TableCell>{dateFormat(n.started, "dddd, mmmm dS, yyyy")}</TableCell>
                                             <TableCell>{dateFormat(n.ended, "dddd, mmmm dS, yyyy")}</TableCell>
                                             <TableCell>{n.witnesses}</TableCell>
+                                            <TableCell>{n.charity}</TableCell>
                                             <TableCell>{n.value}</TableCell>
                                         </TableRow>
                                     );
@@ -141,9 +143,10 @@ class App extends Component {
                     <DialogContent>
                         <TextField
                             autoFocus
-                            margin="dense"
+                            margin="normal"
                             id="name"
                             label="Pledge"
+                            InputLabelProps={{shrink: true}}
                             name="pledge"
                             value={this.state.pledge}
                             onChange={this.handleInputChange}
@@ -151,16 +154,31 @@ class App extends Component {
                             fullWidth
                         />
                         <TextField
+                            InputLabelProps={{shrink: true}}
                             autoFocus
-                            margin="dense"
-                            id="witness"
+                            margin="normal"
+                            name="witness"
                             label="Witness Address"
+                            type="text"
+                            value={this.state.witness}
+                            onChange={this.handleInputChange}
+                            fullWidth
+                        />
+                        <TextField
+                            InputLabelProps={{shrink: true}}
+                            autoFocus
+                            margin="normal"
+                            name="charity"
+                            label="Charity Address"
+                            value={this.state.charity}
+                            onChange={this.handleInputChange}
                             type="text"
                             fullWidth
                         />
                         <TextField
                             autoFocus
-                            margin="dense"
+                            margin="normal"
+                            InputLabelProps={{shrink: true}}
                             id="value"
                             name="amount"
                             value={this.state.amount}
@@ -170,8 +188,9 @@ class App extends Component {
                             fullWidth
                         />
                         <TextField
+                            InputLabelProps={{shrink: true}}
                             autoFocus
-                            margin="dense"
+                            margin="normal"
                             id="endDate"
                             name="endDate"
                             value={this.state.endDate}
