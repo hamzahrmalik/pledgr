@@ -60,4 +60,12 @@ contract GoalContract
             //not witness or already voted.
         }
     }
+
+    function returnToUser() public payable {
+        userAddress.transfer(amount);
+    }
+
+    function forfeit() public payable {
+        forfeitAddress.transfer(amount);
+    }
 }
