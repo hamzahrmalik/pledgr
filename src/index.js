@@ -5,7 +5,8 @@ import { Provider } from "react-redux";
 import { syncHistoryWithStore } from "react-router-redux";
 
 // Layouts
-import App from "./App";
+import Frontend from "./Frontend";
+import Vote from "./Vote";
 
 
 // Redux Store

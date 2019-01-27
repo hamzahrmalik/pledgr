@@ -24,7 +24,7 @@ function createData(name, started, ended, witnesses, charity, value) {
     return {id, name, started, ended, witnesses, charity, value};
 }
 
-class App extends Component {
+class Frontend extends Component {
     constructor(props) {
         super(props);
 
@@ -235,4 +235,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(App);
+)(Frontend);
