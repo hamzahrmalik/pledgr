@@ -1,15 +1,13 @@
 import GoalContract from "../../build/contracts/Goal.json";
 import GoalRegistryContract from "../../build/contracts/GoalRegistry.json";
-import { browserHistory } from "react-router";
 import store from "../store.js";
-
+import { UPDATE_PLEDGES } from "./actionTypes";
 const contract = require("truffle-contract");
 
-export const USER_LOGGED_IN = "USER_LOGGED_IN";
-function userLoggedIn(user) {
+function updatePledges(pledges) {
   return {
-    type: USER_LOGGED_IN,
-    payload: user
+    type: UPDATE_PLEDGES,
+    payload: pledges
   };
 }
 
@@ -28,13 +26,18 @@ export function createPledge() {
       // Declaring this for later so we can chain functions on Authentication.
       var goalInstance;
 
+      console.log("action called");
+
       // Get current ethereum wallet.
-      web3.eth.getCoinbase(async (error, coinbase) => {
+      web3.eth.getCoinbase((error, coinbase) => {
         // Log errors, if any.
         if (error) {
           console.error(error);
         }
         goal.defaults({
+          from: coinbase
+        });
+        goalRegistry.defaults({
           from: coinbase
         });
 
@@ -49,13 +52,20 @@ export function createPledge() {
           ])
           .then(result => {
             console.log("pledge", result);
-            goalRegistry.defaults({
-              from: coinbase
-            });
-            goalRegistry.deployed().then(instance => {
-              instance.registerContract(result.address);
-              console.log("store pledge", instance);
-            });
+
+            goalRegistry
+              .deployed()
+              .then(instance => {
+                instance.registerContract(result.address);
+                console.log("store pledge", instance);
+              })
+              .then(_ => {
+                console.log("Done");
+                dispatch(getPledges());
+              });
+          })
+          .catch(rejected => {
+            console.log("Rejected pledge", rejected);
           });
       });
     };
@@ -70,12 +80,11 @@ export function getPledges() {
   // Double-check web3's status.
   if (typeof web3 !== "undefined") {
     return function(dispatch) {
+      console.log("get pledges");
+
       // Using truffle-contract we create the authentication object.
       const goalRegistry = contract(GoalRegistryContract);
       goalRegistry.setProvider(web3.currentProvider);
-
-      // Declaring this for later so we can chain functions on Authentication.
-      var goalInstance;
 
       // Get current ethereum wallet.
       web3.eth.getCoinbase(async (error, coinbase) => {
@@ -86,9 +95,12 @@ export function getPledges() {
         goalRegistry.defaults({
           from: coinbase
         });
+
         goalRegistry.deployed().then(instance => {
+          console.log("Got registry");
           instance.getGoals().then(goals => {
             console.log(goals);
+            dispatch(updatePledges(goals));
           });
         });
       });

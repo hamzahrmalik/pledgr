@@ -3,9 +3,7 @@ import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import MenuIcon from "@material-ui/core/Menu";
 import classes from "@material-ui/core/package.json";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -80,7 +78,7 @@ class App extends Component {
   };
 
   makeContract = data => {
-    this.props.createPledge();
+    this.props.createPledgeFunc();
     console.log("Making contract of");
     console.log(data);
     //TODO do the magic
@@ -91,13 +89,6 @@ class App extends Component {
       <div className=" ">
         <AppBar position="static">
           <Toolbar>
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="Menu"
-            >
-              <MenuIcon />
-            </IconButton>
             <Typography
               variant="title"
               color="inherit"
@@ -110,7 +101,7 @@ class App extends Component {
 
         <div style={{ padding: 16 }}>
           <h1>My Pledges</h1>
-
+          {this.props.pledges.length}
           <Paper className={classes.root}>
             <Table className={classes.table}>
               <TableHead>
@@ -236,12 +227,14 @@ class App extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {};
+  return {
+    pledges: state.pledgesReducer.pledges
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    createPledge: () => {
+    createPledgeFunc: () => {
       dispatch(createPledge());
     },
     updatePledges: () => {
