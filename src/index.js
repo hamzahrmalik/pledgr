@@ -11,7 +11,7 @@ import getWeb3 from "./util/web3/getWeb3";
 
 // Layouts
 import App from "./App";
-// import App from './Frontend'
+// import App from "./Frontend";
 import Home from "./layouts/home/Home";
 import Dashboard from "./layouts/dashboard/Dashboard";
 import SignUp from "./user/layouts/signup/SignUp";
