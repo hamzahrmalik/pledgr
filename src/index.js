@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router, Route, browserHistory } from "react-router";
-import { Provider } from "react-redux";
-import { syncHistoryWithStore } from "react-router-redux";
+import {Router, Route, browserHistory} from "react-router";
+import {Provider} from "react-redux";
+import {syncHistoryWithStore} from "react-router-redux";
 
 // Layouts
 import Frontend from "./App";
@@ -24,4 +24,5 @@ ReactDOM.render(
     </Router>
   </Provider>,
   document.getElementById("root")
+
 );
