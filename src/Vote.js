@@ -1,68 +1,83 @@
 import React, {Component} from "react";
 
 import Button from "@material-ui/core/Button";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import MenuIcon from "@material-ui/core/Menu";
-import classes from "@material-ui/core/package.json";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import TopBar from "./TopBar"
 import TextField from "@material-ui/core/TextField";
-import dateFormat from "dateformat";
 
 class Vote extends Component {
-
 
     constructor(props) {
         super(props);
 
-
-
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleClickOpen = () => {
-        this.setState({addDialogOpen: true});
+    state = {
+        votingFor: ""
     };
 
-    handleClose = () => {
-        this.setState({addDialogOpen: false});
+    clickedYes() {
+        console.log("YE");
     };
 
+    clickedNo(){
+        console.log("NO");
+    };
 
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === "checkbox" ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
 
     render() {
         return (
             <div className=" ">
-                <AppBar position="static">
-                    <Toolbar>
-
-                        <Typography variant="title" color="inherit" className={classes.flex}>
-                            Pledgr
-                        </Typography>
-
-                    </Toolbar>
-                </AppBar>
+                <TopBar position="static"/>
 
 
                 <div style={{padding: 16, textAlign: 'center'}}>
 
 
                     <h1>Vote</h1>
-                    <h2>Did they do the thing?</h2>
+                    <h2>What would you like to vote on?</h2>
 
+                    <TextField
+                        autoFocus
+                        margin="normal"
+                        id="name"
+                        label="Address"
+                        InputLabelProps={{shrink: true}}
+                        name="votingFor"
+                        value={this.state.votingFor}
+                        onChange={this.handleInputChange}
+                        type="text"
+                        style={{width: 400}}
+                    />
+                    <br/>
+                    <br/>
+                    <h2>Was the action completed?</h2>
 
-                    <Button style={{height: 200, width: 200, background: '#33ff88', color: '#FFF', fontSize: 40}}>YES</Button>
-                    <Button style={{height: 200, width: 200, background: '#ff5555', marginLeft: 100, color: '#FFF', fontSize: 40}}>NO</Button>
+                    <Button onclick={this.clickedYes} style={{
+                        height: 200,
+                        width: 200,
+                        background: '#33ff88',
+                        color: '#FFF',
+                        fontSize: 40
+                    }}>YES</Button>
+
+                    <Button onclick={this.clickedNo} style={{
+                        height: 200,
+                        width: 200,
+                        background: '#ff5555',
+                        marginLeft: 100,
+                        color: '#FFF',
+                        fontSize: 40
+                    }}>NO</Button>
 
                 </div>
 

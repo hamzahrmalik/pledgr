@@ -1,12 +1,7 @@
 import React, {Component} from "react";
 
-import {Link} from "react-router";
 import Button from "@material-ui/core/Button";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import MenuIcon from "@material-ui/core/Menu";
+import TopBar from "./TopBar"
 import classes from "@material-ui/core/package.json";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -90,24 +85,7 @@ class App extends Component {
     render() {
         return (
             <div className=" ">
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton
-                            className={classes.menuButton}
-                            color="inherit"
-                            aria-label="Menu"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography
-                            variant="title"
-                            color="inherit"
-                            className={classes.flex}
-                        >
-                            PLEDGR
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
+                <TopBar position="static"/>
 
 
                 <div style={{padding: 16}}>
