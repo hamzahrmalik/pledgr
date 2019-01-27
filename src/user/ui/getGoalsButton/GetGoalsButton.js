@@ -1,6 +1,6 @@
 import React from "react";
 
-const GoalButton = ({ onLoginUserClick }) => {
+const GetGoalsButton = ({ onLoginUserClick }) => {
   return (
     <li className="pure-menu-item">
       <a
@@ -8,10 +8,10 @@ const GoalButton = ({ onLoginUserClick }) => {
         className="pure-menu-link"
         onClick={event => onLoginUserClick(event)}
       >
-        Create Goal
+        Get Goals
       </a>
     </li>
   );
 };
 
-export default GoalButton;
+export default GetGoalsButton;

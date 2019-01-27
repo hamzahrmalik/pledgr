@@ -6,6 +6,7 @@ import { HiddenOnlyAuth, VisibleOnlyAuth } from "./util/wrappers.js";
 import LoginButtonContainer from "./user/ui/loginbutton/LoginButtonContainer";
 import LogoutButtonContainer from "./user/ui/logoutbutton/LogoutButtonContainer";
 import GoalButtonContainer from "./user/ui/goalButton/GoalButtonContainer";
+import GetGoalsButtonContainer from "./user/ui/getGoalsButton/GetGoalsButtonContainer";
 
 // Styles
 import "./css/oswald.css";
@@ -53,6 +54,7 @@ class App extends Component {
             Truffle Box
           </Link>
           <GoalButtonContainer />
+          <GetGoalsButtonContainer />
         </nav>
 
         {this.props.children}

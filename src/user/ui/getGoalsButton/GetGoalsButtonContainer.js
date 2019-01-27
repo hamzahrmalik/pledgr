@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import GoalButton from "./GoalButton";
-import { createGoal } from "./GoalButtonActions";
+import GetGoalsButton from "./GetGoalsButton";
+import { getGoals } from "./GetGoalsButtonActions";
 
 const mapStateToProps = (state, ownProps) => {
   return {};
@@ -11,14 +11,14 @@ const mapDispatchToProps = dispatch => {
     onLoginUserClick: event => {
       event.preventDefault();
 
-      dispatch(createGoal());
+      dispatch(getGoals());
     }
   };
 };
 
-const GoalButtonContainer = connect(
+const GetGoalsButtonContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(GoalButton);
+)(GetGoalsButton);
 
-export default GoalButtonContainer;
+export default GetGoalsButtonContainer;
