@@ -93,8 +93,7 @@ class Vote extends Component {
     );
   }
 }
-
-const mapDispatchToProps = dispatch => {
+      const mapDispatchToProps = dispatch => {
   return {
     voteFunc: params => {
       dispatch(vote(...params));
