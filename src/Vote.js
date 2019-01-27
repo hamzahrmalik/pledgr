@@ -62,7 +62,7 @@ class Vote extends Component {
                     <br/>
                     <h2>Was the action completed?</h2>
 
-                    <Button onclick={this.clickedYes} style={{
+                    <Button onClick={this.clickedYes} style={{
                         height: 200,
                         width: 200,
                         background: '#33ff88',
@@ -70,7 +70,7 @@ class Vote extends Component {
                         fontSize: 40
                     }}>YES</Button>
 
-                    <Button onclick={this.clickedNo} style={{
+                    <Button onClick={this.clickedNo} style={{
                         height: 200,
                         width: 200,
                         background: '#ff5555',

@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router, Route, browserHistory } from "react-router";
-import { Provider } from "react-redux";
-import { syncHistoryWithStore } from "react-router-redux";
+import {Router, Route, browserHistory} from "react-router";
+import {Provider} from "react-redux";
+import {syncHistoryWithStore} from "react-router-redux";
 
 // Layouts
 import Frontend from "./Frontend";
@@ -19,7 +19,6 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 
 ReactDOM.render(
-
     <Provider store={store}>
         <Router history={history}>
             <Route path="vote" component={Vote}/>
@@ -28,5 +27,4 @@ ReactDOM.render(
         </Router>
     </Provider>,
     document.getElementById("root")
-
 );
