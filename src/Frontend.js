@@ -4,9 +4,7 @@ import {Link} from "react-router";
 import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import MenuIcon from "@material-ui/core/Menu";
 import classes from "@material-ui/core/package.json";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -87,66 +85,58 @@ class App extends Component {
         //TODO do the magic
     };
 
-    render() {
-        return (
-            <div className=" ">
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton
-                            className={classes.menuButton}
-                            color="inherit"
-                            aria-label="Menu"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography
-                            variant="title"
-                            color="inherit"
-                            className={classes.flex}
-                        >
-                            PLEDGR
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
+  render() {
+    return (
+      <div className=" ">
+        <AppBar position="static">
+          <Toolbar>
+            <Typography
+              variant="title"
+              color="inherit"
+              className={classes.flex}
+            >
+              PLEDGR
+            </Typography>
+          </Toolbar>
+        </AppBar>
 
-
-                <div style={{padding: 16}}>
-                    <h1>My Pledges</h1>
-
-                    <Paper className={classes.root}>
-                        <Table className={classes.table}>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Pledge</TableCell>
-                                    <TableCell>Started</TableCell>
-                                    <TableCell>End</TableCell>
-                                    <TableCell>Witnesses</TableCell>
-                                    <TableCell>Charity</TableCell>
-                                    <TableCell>Value</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {this.state.data.map(n => {
-                                    return (
-                                        <TableRow key={n.id}>
-                                            <TableCell component="th" scope="row">
-                                                {n.name}
-                                            </TableCell>
-                                            <TableCell>
-                                                {dateFormat(n.started, "dddd, mmmm dS, yyyy")}
-                                            </TableCell>
-                                            <TableCell>
-                                                {dateFormat(n.ended, "dddd, mmmm dS, yyyy")}
-                                            </TableCell>
-                                            <TableCell>{n.witnesses}</TableCell>
-                                            <TableCell>{n.charity}</TableCell>
-                                            <TableCell>{n.value}</TableCell>
-                                        </TableRow>
-                                    );
-                                })}
-                            </TableBody>
-                        </Table>
-                    </Paper>
+        <div style={{ padding: 16 }}>
+          <h1>My Pledges</h1>
+          {this.props.pledges.length}
+          <Paper className={classes.root}>
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Pledge</TableCell>
+                  <TableCell>Started</TableCell>
+                  <TableCell>End</TableCell>
+                  <TableCell>Witnesses</TableCell>
+                  <TableCell>Charity</TableCell>
+                  <TableCell>Value</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {this.state.data.map(n => {
+                  return (
+                    <TableRow key={n.id}>
+                      <TableCell component="th" scope="row">
+                        {n.name}
+                      </TableCell>
+                      <TableCell>
+                        {dateFormat(n.started, "dddd, mmmm dS, yyyy")}
+                      </TableCell>
+                      <TableCell>
+                        {dateFormat(n.ended, "dddd, mmmm dS, yyyy")}
+                      </TableCell>
+                      <TableCell>{n.witnesses}</TableCell>
+                      <TableCell>{n.charity}</TableCell>
+                      <TableCell>{n.value}</TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </Paper>
 
                     <Button
                         variant="contained"
@@ -238,18 +228,20 @@ class App extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {};
+  return {
+    pledges: state.pledgesReducer.pledges
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {
-        createPledge: () => {
-            dispatch(createPledge());
-        },
-        updatePledges: () => {
-            dispatch(getPledges());
-        }
-    };
+  return {
+    createPledgeFunc: () => {
+      dispatch(createPledge());
+    },
+    updatePledges: () => {
+      dispatch(getPledges());
+    }
+  };
 };
 
 export default connect(
