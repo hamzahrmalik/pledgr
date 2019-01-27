@@ -1,4 +1,5 @@
 import GoalContract from "../../../../build/contracts/Goal.json";
+import GoalRegistryContract from "../../../../build/contracts/GoalRegistry.json";
 import { browserHistory } from "react-router";
 import store from "../../../store";
 
@@ -21,6 +22,8 @@ export function loginUser() {
       // Using truffle-contract we create the authentication object.
       const goal = contract(GoalContract);
       goal.setProvider(web3.currentProvider);
+      const goalRegistry = contract(GoalRegistryContract);
+      goalRegistry.setProvider(web3.currentProvider);
 
       // Declaring this for later so we can chain functions on Authentication.
       var goalInstance;
@@ -45,10 +48,12 @@ export function loginUser() {
             ["0xB1823546a3D953e458503b02422936f0317A2352"]
           ])
           .then(result => {
-            console.log(result);
+            goalRegistry.deployed().then(instance => {
+              instance.registerContract(result.address);
+              console.log(instance);
+              console.log(result);
+            });
           });
-
-        console.log("hello");
       });
     };
   } else {
