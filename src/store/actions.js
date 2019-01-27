@@ -112,13 +112,13 @@ export function getPledges() {
 }
 
 export function vote(address, voteBool) {
-  let web3 = store.getState.web3.web3Instance;
+  let web3 = store.getState().web3.web3Instance;
 
   // Double-check web3's status.
   if (typeof web3 !== "undefined") {
     return function(dispatch) {
       // Using truffle-contract we create the authentication object.
-      const originalContract = contract(GoalRegistryContract);
+      const originalContract = contract(GoalContract);
       originalContract.setProvider(web3.currentProvider);
 
       // Declaring this for later so we can chain functions on Authentication.
