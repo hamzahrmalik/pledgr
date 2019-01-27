@@ -1,7 +1,7 @@
-import GoalContract from "../../../../build/contracts/Goal.json";
-import GoalRegistryContract from "../../../../build/contracts/GoalRegistry.json";
+import GoalContract from "../../build/contracts/Goal.json";
+import GoalRegistryContract from "../../build/contracts/GoalRegistry.json";
 import { browserHistory } from "react-router";
-import store from "../../../store";
+import store from "../store.js";
 
 const contract = require("truffle-contract");
 
@@ -13,7 +13,7 @@ function userLoggedIn(user) {
   };
 }
 
-export function loginUser() {
+export function createPledge() {
   let web3 = store.getState().web3.web3Instance;
 
   // Double-check web3's status.
@@ -64,7 +64,7 @@ export function loginUser() {
   }
 }
 
-export function getGoals() {
+export function getPledges() {
   let web3 = store.getState().web3.web3Instance;
 
   // Double-check web3's status.
