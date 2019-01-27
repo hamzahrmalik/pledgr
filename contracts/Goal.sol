@@ -4,7 +4,7 @@ contract GoalContract
     address payable userAddress; // user's address, for returning money
     uint64 amount; // amount of currency stored
     string goalDescription; // brief description
-    uint64 deadline; // Sort it out to be hours / convert to unix epoch //diff types of goals
+    uint32 deadline; // Sort it out to be hours / convert to unix epoch //diff types of goals
     address payable forfeitAddress; // address for money to be sent to on forfeit
     WitnessData[] witnesses; // array of "witnesses"
 
@@ -22,7 +22,7 @@ contract GoalContract
 
     /// initialises a contract with { #witnesses, amount of money, description, deadline, forfeit address,
     ///                             {witnessAdresses} }
-    constructor (uint32 amountOfWitnesses, uint64 _amount, string memory _goalDescription, uint64 _deadline, address payable _forfeitAddress, address[] memory _witnessAddresses) public {
+    constructor (uint32 amountOfWitnesses, uint64 _amount, string memory _goalDescription, uint32 _deadline, address payable _forfeitAddress, address[] memory _witnessAddresses) public {
         userAddress = msg.sender; // set user address to that of current user
         amount = _amount;
         goalDescription = _goalDescription;
@@ -105,14 +105,14 @@ contract GoalContract
 		}
 	}
 
-	/// timer still to be implemented
+	/// Implement checking of the function!!
 	function deadlineCondition() public {
-	//	if (timeCondition) { // pseudo-code; this is the function that should be called at the deadline.
+		if (deadline <= now) { // pseudo-code; this is the function that should be called at the deadline.
 			if (((1000*countTrueVotes() / countTotalVotes()) >= (1000*minWitnessesIfAllVote / witnesses.length)) && (countTotalVotes() > 0)){
 				returnToUser();
 			} else {
 				forfeit();
 			}
-	//	}
+		}
     }
 }
