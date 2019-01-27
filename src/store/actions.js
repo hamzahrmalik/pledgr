@@ -2,13 +2,13 @@ import GoalContract from "../../build/contracts/Goal.json";
 import GoalRegistryContract from "../../build/contracts/GoalRegistry.json";
 import { browserHistory } from "react-router";
 import store from "../store.js";
+import { UPDATE_PLEDGES } from "./actionTypes";
 
 const contract = require("truffle-contract");
 
-export const USER_LOGGED_IN = "USER_LOGGED_IN";
-function userLoggedIn(user) {
+function updatePledges(user) {
   return {
-    type: USER_LOGGED_IN,
+    type: UPDATE_PLEDGES,
     payload: user
   };
 }
@@ -102,7 +102,6 @@ export function getPledges() {
               //   });
               dispatch(updatePledges(result));
             });
-
           });
         });
       });
@@ -114,7 +113,7 @@ export function getPledges() {
 
 export function vote(address, voteBool) {
   let web3 = store.getState.web3.web3Instance;
-  
+
   // Double-check web3's status.
   if (typeof web3 !== "undefined") {
     return function(dispatch) {
@@ -141,7 +140,6 @@ export function vote(address, voteBool) {
     };
   }
 }
-
 
 function resolvePledge(address) {
   return new Promise((resolve, reject) => {
@@ -172,4 +170,3 @@ function resolvePledge(address) {
     }
   });
 }
-
